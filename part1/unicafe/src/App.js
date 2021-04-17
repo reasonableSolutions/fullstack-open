@@ -42,7 +42,10 @@ const Button = (props) => {
 
 const Statistic = (props) => {
   return (
-    <p>{props.label} {props.number}</p>
+    <>
+      <td>{props.label}</td>
+      <td>{props.number}</td>
+    </>
   )
 }
 
@@ -59,14 +62,28 @@ const Stats = (props) => {
 
   else {
     return (
-      <>
-        <Statistic label="good" number={props.good} />
-        <Statistic label="neutral" number={props.neutral} />
-        <Statistic label="bad" number={props.bad} />
-        <Statistic label="all" number={all} />
-        <Statistic label="average" number={average}/>
-        <Statistic label="positive" number={positive}/>
-      </>
+      <table>
+        <tbody>
+          <tr>  
+            <Statistic label="good" number={props.good} />
+          </tr>
+          <tr>
+            <Statistic label="neutral" number={props.neutral} />
+          </tr>
+          <tr>  
+            <Statistic label="bad" number={props.bad} />
+          </tr>
+          <tr>
+            <Statistic label="all" number={all} />
+          </tr>
+          <tr>
+            <Statistic label="average" number={average}/>
+          </tr>
+          <tr>
+            <Statistic label="positive" number={positive}/>
+          </tr>
+        </tbody>
+      </table>
     )
   }
 }
