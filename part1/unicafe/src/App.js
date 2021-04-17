@@ -40,7 +40,7 @@ const Button = (props) => {
   )
 }
 
-const Stat = (props) => {
+const Statistic = (props) => {
   return (
     <p>{props.label} {props.number}</p>
   )
@@ -51,16 +51,24 @@ const Stats = (props) => {
   const average = (props.good - props.bad)/all
   const positive = props.good/all
 
-  return (
-    <>
-      <Stat label="good" number={props.good} />
-      <Stat label="neutral" number={props.neutral} />
-      <Stat label="bad" number={props.bad} />
-      <Stat label="all" number={all} />
-      <Stat label="average" number={average}/>
-      <Stat label="positive" number={positive}/>
-    </>
-  )
+  if (all === 0){
+    return (
+      <div>No feedback given</div>
+    )
+  }
+
+  else {
+    return (
+      <>
+        <Statistic label="good" number={props.good} />
+        <Statistic label="neutral" number={props.neutral} />
+        <Statistic label="bad" number={props.bad} />
+        <Statistic label="all" number={all} />
+        <Statistic label="average" number={average}/>
+        <Statistic label="positive" number={positive}/>
+      </>
+    )
+  }
 }
 
 export default App
