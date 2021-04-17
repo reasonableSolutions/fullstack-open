@@ -18,24 +18,21 @@ const App = () => {
     setBad(bad+1)
   }
 
+  const all = good + neutral + bad
+  const average = (good - bad)/all
+  const positive = good/all
+
   return (
     <div>
-      {
-        /*
-        <Heading text="give feedback"/>
-        <Button /><Button /><Button />
-        <Heading text = "statistics" />
-        <Stat />
-        <Stat />
-        <Stat />
-        */
-      }
       <Heading text="give feedback" />
       <Button handler={goodHandler} text="good" /><Button handler={neutralHandler} text="neutral" /><Button handler={badHandler} text="bad" />
       <Heading text = "statistics" />
       <Stat label="good" number={good} />
       <Stat label="neutral" number={neutral} />
       <Stat label="bad" number={bad} />
+      <Stat label="all" number={all} />
+      <Stat label="average" number={average}/>
+      <Stat label="positive" number={positive}/>
     </div>
   )
 }
