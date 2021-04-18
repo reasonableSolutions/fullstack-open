@@ -12,15 +12,27 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0])
+
   const buttonHandler = () => {
     setSelected(getRandomInt(6))
+  }
+
+  const voteHandler = () =>{
+    const newArray = [
+      ...votes
+    ]
+    newArray[selected] += 1
+    setVotes(newArray)
   }
 
   return (
     <div>
       {anecdotes[selected]}
       <br></br>
-      <Button label = "random anecdote" handler={buttonHandler}/>
+      This anecdote has {votes[selected]} votes.
+      <br></br>
+      <Button label="vote" handler={voteHandler}/><Button label = "random anecdote" handler={buttonHandler}/>
     </div>
   )
   
