@@ -14,6 +14,10 @@ const App = () => {
 
   const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0])
 
+  const [max, setMax] = useState(0)
+  
+  const [best, setBest] = useState(0)
+
   const buttonHandler = () => {
     setSelected(getRandomInt(6))
   }
@@ -23,17 +27,24 @@ const App = () => {
       ...votes
     ]
     newArray[selected] += 1
+    if (newArray[selected] > max) {
+      //debugger
+      setMax(newArray[selected])
+      setBest(selected)
+      //debugger
+    }
     setVotes(newArray)
   }
 
   return (
-    <div>
-      {anecdotes[selected]}
-      <br></br>
-      This anecdote has {votes[selected]} votes.
-      <br></br>
+    <>
+      <h1>Anecdote of the day</h1>
+      <div>{anecdotes[selected]}</div>
+      <div>This anecdote has {votes[selected]} votes.</div>
       <Button label="vote" handler={voteHandler}/><Button label = "random anecdote" handler={buttonHandler}/>
-    </div>
+      <h1>Anecdote with most votes</h1>
+      <div>{anecdotes[best]}</div>
+    </>
   )
   
 }
