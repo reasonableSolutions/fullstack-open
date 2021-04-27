@@ -17,7 +17,7 @@ const App = () => {
 
   const personsToShow = (nameFilter === '')
     ? persons
-    : persons.filter(person => 
+    : persons.filter(person =>
       person.name.match(RegExp(nameFilter,'gi')) !== null)
 
   const handleAdd = (event) => {
