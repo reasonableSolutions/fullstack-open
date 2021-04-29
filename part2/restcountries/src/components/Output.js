@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Output = ({data}) => {
+const Output = ({data, setFilter}) => {
     if (data.length > 10) {
         return (
             <div>
@@ -11,7 +11,9 @@ const Output = ({data}) => {
     else if (data.length > 1) {
         return (
             <>
-                {data.map(entry => <div key={entry.alpha3Code}>{entry.name}</div>)}
+                {data.map(entry => 
+                    <div key={entry.alpha3Code}>{entry.name} <button onClick={() => setFilter(entry.name)}>show</button></div>
+                )}
             </>
         )
     }

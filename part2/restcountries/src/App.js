@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div>
       <Filter nameFilter={nameFilter} handleFilter={handleFilter} />
-      <Output data={countriesToShow} />
+      <Output data={countriesToShow} setFilter={setNameFilter}/>
     </div>
   )
 }
