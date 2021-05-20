@@ -6,7 +6,7 @@ import Output from './components/Output'
 
 const App = () => {
   
-  const [persons, setPersons] = useState([])
+  const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ nameFilter, setNameFilter ] = useState('')
@@ -26,9 +26,18 @@ const App = () => {
       const notice = `${newName} is already added to phonebook`
       window.alert(notice)
       }
-    else {setPersons(persons.concat(nameObject))}
-    setNewName('')
-    setNewNumber('')
+    else {  
+      axios
+        .post('http://localhost:3001/persons', nameObject)
+        .then( response => {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('')
+        })
+        .catch( error => {
+          window.alert("whoops, HTTP POST failed")
+        })
+    }
   }
 
   const handleTypingName = (event) => {
