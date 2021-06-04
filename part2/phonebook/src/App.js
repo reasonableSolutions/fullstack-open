@@ -1,8 +1,8 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Filter from './components/Filter'
 import InputForm from './components/InputForm'
 import Output from './components/Output'
+import PersonService from './services/personservice'
 
 const App = () => {
   
@@ -12,12 +12,17 @@ const App = () => {
   const [ nameFilter, setNameFilter ] = useState('')
 
   useEffect(() => {
-    axios
+    PersonService
+      .getAll()
+      .then(response => {
+        setPersons(response)
+      })
+    /* axios
       .get('http://localhost:3001/persons')
       .then(response => {
         const notes = response.data
         setPersons(notes)
-      })
+      }) */
   }, [])
 
   const personsToShow = (nameFilter === '')
@@ -36,7 +41,17 @@ const App = () => {
       window.alert(notice)
       }
     else {  
-      axios
+      PersonService
+        .create(nameObject)
+        .then(response => {
+          setPersons(persons.concat(response))
+          setNewName('')
+          setNewNumber('')
+        })
+        .catch( error => {
+          window.alert("whoops, HTTP POST failed")
+        })
+      /* axios
         .post('http://localhost:3001/persons', nameObject)
         .then( response => {
           setPersons(persons.concat(response.data))
@@ -45,7 +60,7 @@ const App = () => {
         })
         .catch( error => {
           window.alert("whoops, HTTP POST failed")
-        })
+        }) */
     }
   }
 
