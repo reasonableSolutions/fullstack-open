@@ -11,6 +11,15 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ nameFilter, setNameFilter ] = useState('')
 
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        const notes = response.data
+        setPersons(notes)
+      })
+  }, [])
+
   const personsToShow = (nameFilter === '')
     ? persons
     : persons.filter(person =>
@@ -51,15 +60,6 @@ const App = () => {
   const handleFilter = (event) => {
     setNameFilter(event.target.value)
   }
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        const notes = response.data
-        setPersons(notes)
-      })
-  }, [])
 
   return (
     <div>
