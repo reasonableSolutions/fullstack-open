@@ -7,6 +7,7 @@ const App = () => {
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(false)
 
+  //get initial data
   useEffect(() => {
     noteService
       .getAll()
@@ -14,7 +15,7 @@ const App = () => {
       setNotes(initialNotes)
     })
   }, [])
-
+  
   const addNote = (event) => {
     event.preventDefault()
     const noteObject = {
