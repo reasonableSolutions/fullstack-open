@@ -64,6 +64,18 @@ const App = () => {
     }
   }
 
+  const handleRemove = (id) => {
+    console.log("remove", id)
+    PersonService
+      .remove(id)
+      .then(response => {
+        setPersons(persons.filter(person => person.id !== id))
+      })
+      .catch (error => {
+        window.alert("whoops, HTTP DELETE failed")
+      })
+  }
+
   const handleTypingName = (event) => {
     setNewName(event.target.value)
   }
@@ -89,7 +101,10 @@ const App = () => {
         handleAdd={handleAdd}
         />
       <h2>Numbers</h2>
-      <Output persons={personsToShow}/>
+      <Output 
+        persons={personsToShow}
+        handleRemove={handleRemove}
+      />
     </div>
   )
 }
