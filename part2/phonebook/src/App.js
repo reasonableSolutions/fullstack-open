@@ -37,9 +37,25 @@ const App = () => {
       number: newNumber
     }
     if (persons.find(element => element.name === newName) !== undefined){
-      const notice = `${newName} is already added to phonebook`
-      window.alert(notice)
+      const notice = `${newName} is already added to phonebook, update with new number?`
+      const update = window.confirm(notice)
+      if (update) {
+        //lazy duplicating work here, could instead do something neater in parent conditional on line 39
+        const updateID = persons.find(element => element.name === newName).id
+        PersonService
+          .update(updateID, nameObject)
+          .then(response => {
+            setPersons(persons.map(person => {
+              if (person.id === updateID) {
+                return response
+              }
+              else return person
+            }))
+          })
       }
+      setNewName('')
+      setNewNumber('')
+    }
     else {  
       PersonService
         .create(nameObject)

@@ -16,8 +16,13 @@ const remove = (id) => {
     return request.then(response => response.data)
 }
 
+const update = (id, nameObject) => {
+    const request = axios.put(`${baseURL}/${id}`, nameObject)
+    return request.then(response => response.data)
+}
+
 const services = {
-    getAll, create, remove
+    getAll, create, remove, update
 }
 
 export default services
