@@ -28,6 +28,8 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-export default { 
+const services = { 
   getAll, create, update
 }
+
+export default services

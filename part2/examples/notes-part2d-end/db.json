@@ -4,7 +4,7 @@
       "id": 1,
       "content": "HTML is easy",
       "date": "2019-05-30T17:30:31.098Z",
-      "important": true
+      "important": false
     },
     {
       "id": 2,
@@ -21,7 +21,7 @@
     {
       "content": "trying to do all this with adhd is difficult",
       "date": "2021-05-11T03:36:49.682Z",
-      "important": false,
+      "important": true,
       "id": 4
     },
     {
@@ -33,13 +33,13 @@
     {
       "content": "let's try to do this again",
       "date": "2021-05-11T03:39:06.627Z",
-      "important": false,
+      "important": true,
       "id": 6
     },
     {
       "content": "hey wow this app is really coming together huh",
       "date": "2021-05-11T03:39:33.322Z",
-      "important": false,
+      "important": true,
       "id": 7
     },
     {
