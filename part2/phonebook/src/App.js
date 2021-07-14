@@ -4,6 +4,7 @@ import InputForm from './components/InputForm'
 import Output from './components/Output'
 import PersonService from './services/personservice'
 import Notification  from './components/Notification'
+import Error from './components/Error'
 
 const App = () => {
   
@@ -12,6 +13,7 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ nameFilter, setNameFilter ] = useState('')
   const [ noteMessage, setNoteMessage ] = useState(null)
+  const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {
     PersonService
@@ -96,7 +98,7 @@ const App = () => {
         setPersons(persons.filter(person => person.id !== id))
       })
       .catch (error => {
-        window.alert("whoops, HTTP DELETE failed")
+        setErrorMessage(`Error, ${persons.find(person => person.id === id).name} has already been removed previously.`)
       })
   }
 
@@ -116,6 +118,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={noteMessage}/>
+      <Error message={errorMessage}/>
       <Filter nameFilter={nameFilter} handleFilter={handleFilter}/>
       <h2>Add a contact</h2>
       <InputForm 
