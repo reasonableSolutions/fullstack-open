@@ -3,6 +3,7 @@ import Filter from './components/Filter'
 import InputForm from './components/InputForm'
 import Output from './components/Output'
 import PersonService from './services/personservice'
+import Notification  from './components/Notification'
 
 const App = () => {
   
@@ -10,6 +11,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ nameFilter, setNameFilter ] = useState('')
+  const [ noteMessage, setNoteMessage ] = useState(null)
 
   useEffect(() => {
     PersonService
@@ -47,22 +49,26 @@ const App = () => {
           .then(response => {
             setPersons(persons.map(person => {
               if (person.id === updateID) {
-                return response
+                return response //if at number to be updated in app state, update with response
               }
-              else return person
+              else return person //else just use what's already there
             }))
+            setNoteMessage(`Added ${newName}`)
+            setTimeout(() => {
+              setNoteMessage(null)
+            }, 5000)
           })
       }
-      setNewName('')
-      setNewNumber('')
     }
     else {  
       PersonService
         .create(nameObject)
         .then(response => {
           setPersons(persons.concat(response))
-          setNewName('')
-          setNewNumber('')
+          setNoteMessage(`Added ${newName}`)
+          setTimeout(() => {
+            setNoteMessage(null)
+          }, 5000)
         })
         .catch( error => {
           window.alert("whoops, HTTP POST failed")
@@ -78,6 +84,8 @@ const App = () => {
           window.alert("whoops, HTTP POST failed")
         }) */
     }
+    setNewName('')
+    setNewNumber('')
   }
 
   const handleRemove = (id) => {
@@ -107,6 +115,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={noteMessage}/>
       <Filter nameFilter={nameFilter} handleFilter={handleFilter}/>
       <h2>Add a contact</h2>
       <InputForm 
