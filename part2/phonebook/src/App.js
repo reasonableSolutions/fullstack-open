@@ -98,7 +98,7 @@ const App = () => {
         setPersons(persons.filter(person => person.id !== id))
       })
       .catch (error => {
-        setErrorMessage(`Error, ${persons.find(person => person.id === id).name} has already been removed previously.`)
+        setErrorMessage(`${persons.find(person => person.id === id).name} has already been removed.`)
       })
   }
 
