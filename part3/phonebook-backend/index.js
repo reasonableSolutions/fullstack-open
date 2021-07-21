@@ -1,4 +1,4 @@
-const { json } = require('express')
+const { json, response } = require('express')
 const express = require('express')
 const app = express()
 
@@ -32,10 +32,28 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-    const time = new Date()
-    response.send(`<div>Phonebook has info for ${persons.length} people </div>
-        <br><br><br><br><br>
-        <div> ${time} </div>`)
+  const time = new Date()
+  response.send(`<div>Phonebook has info for ${persons.length} people </div>
+      <br><br><br><br><br>
+      <div> ${time} </div>`)
+})
+
+app.get('/api/persons/:id', (request, response) =>{
+  const id = Number(request.params.id)
+  console.log(id)
+  const target = persons.find(n => n.id === id)
+  console.log(target)
+  if (target !== undefined){
+    response.send(`
+    Name: ${target.name}
+    <br>
+    Number: ${target.number}
+    `)
+  }
+  else {
+    response.status(400).end()
+  }
+
 })
 
 const PORT = 3001
