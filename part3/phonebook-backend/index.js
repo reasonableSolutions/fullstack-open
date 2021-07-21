@@ -40,9 +40,9 @@ app.get('/info', (request, response) => {
 
 app.get('/api/persons/:id', (request, response) =>{
   const id = Number(request.params.id)
-  console.log(id)
+  // console.log(id)
   const target = persons.find(n => n.id === id)
-  console.log(target)
+  // console.log(target)
   if (target !== undefined){
     response.send(`
     Name: ${target.name}
@@ -53,7 +53,18 @@ app.get('/api/persons/:id', (request, response) =>{
   else {
     response.status(400).end()
   }
+})
 
+app.delete('/api/persons/:id', (request, response) =>{
+  const id = Number(request.params.id)
+  const target = persons.find(n => n.id === id)
+  if (target !== undefined){
+    persons.filter(n => n.id !== id)
+    response.status(200).end()
+  }
+  else {
+    response.status(400).end()
+  }
 })
 
 const PORT = 3001
