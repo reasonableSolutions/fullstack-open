@@ -62,8 +62,15 @@ app.get('/api/persons/:id', (request, response) =>{
 app.post('/api/persons', (request, response) => {
   const body = request.body
   if (!body.name || !body.number) {
+    const errorMsg = body.name ? "number" : "name"
     return response.status(400).json({
-      error: 'content missing'
+      error: `${errorMsg} missing`
+    })
+  }
+  
+  if (persons.find(n => n.name === body.name) !== undefined){
+    return response.status(400).json({
+      error: 'name already exists in database'
     })
   }
 
