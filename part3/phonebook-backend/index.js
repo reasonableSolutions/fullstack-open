@@ -1,8 +1,20 @@
 const { json, response } = require('express')
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 
 app.use(express.json())
+morgan.token('POSTdata', function(req, res) {
+  // console.log('using POSTdata token')
+  // console.log(res.body ? res.body : 'body undefined')
+  if (res.body !== undefined){
+    // console.log('have data in res.body')
+    // return `${res.body.name} ${res.body.number}`
+    return `${JSON.stringify(res.body)}`
+  }
+  else return ""
+})
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :POSTdata', {stream: console.log()}))
 
 let persons = [
     { 
@@ -67,7 +79,7 @@ app.post('/api/persons', (request, response) => {
       error: `${errorMsg} missing`
     })
   }
-  
+
   if (persons.find(n => n.name === body.name) !== undefined){
     return response.status(400).json({
       error: 'name already exists in database'
@@ -82,6 +94,7 @@ app.post('/api/persons', (request, response) => {
 
   persons = persons.concat(person)
   response.json(person)
+  response.body = person
 })
 
 app.delete('/api/persons/:id', (request, response) =>{
