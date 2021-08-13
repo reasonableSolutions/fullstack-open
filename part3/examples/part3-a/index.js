@@ -37,7 +37,7 @@ const requestLogger = (request, response, next) => {
 app.use(requestLogger)
 
 app.get('/', (request, response) => {  
-  response.send('<h1>What is test test test</h1>')
+  response.send('<h1>You have reached the front page</h1>')
 })
 
 app.get('/api/notes', (request, response) => {  
